@@ -1,4 +1,4 @@
-export class Item {
+export abstract class Item {
   category: string
   description: string
   price: number
@@ -8,4 +8,10 @@ export class Item {
     this.description = description
     this.price = price
   }
+
+  calculateTax() {
+    return (this.price * this.getTax()) / 100
+  }
+
+  abstract getTax(): number
 }

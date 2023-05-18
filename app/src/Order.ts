@@ -12,14 +12,8 @@ export class Order {
   }
 
   getTaxes() {
-    const taxes = this.items.reduce((previousValue, { category, price }) => {
-      if (category === 'Beer') {
-        previousValue += (price * 10) / 100
-      }
-
-      if (category === 'Whisky') {
-        previousValue += (price * 20) / 100
-      }
+    const taxes = this.items.reduce((previousValue, item) => {
+      previousValue += item.calculateTax()
 
       return previousValue
     }, 0)
