@@ -1,4 +1,5 @@
 import { Item } from './Item'
+import { TaxItem } from './TaxItem'
 
 export class Order {
   public items: Item[]
@@ -13,7 +14,9 @@ export class Order {
 
   getTaxes() {
     const taxes = this.items.reduce((previousValue, item) => {
-      previousValue += item.calculateTax()
+      if (item instanceof TaxItem) {
+        previousValue += item.calculateTax()
+      }
 
       return previousValue
     }, 0)
