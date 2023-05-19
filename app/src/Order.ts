@@ -1,11 +1,14 @@
 import { Item } from './Item'
+import { MessageData } from './MessageDta'
 import { TaxItem } from './TaxItem'
 
 export class Order {
   public items: Item[]
+  messageData: MessageData
 
-  constructor() {
+  constructor(messageData: MessageData) {
     this.items = []
+    this.messageData = messageData
   }
 
   addItem(item: Item) {
@@ -32,5 +35,13 @@ export class Order {
     }, 0)
 
     return total
+  }
+
+  async print(language: string) {
+    const message = await this.messageData.read(language)
+
+    return message
+      .replace('{{price}}', `${this.getTotal()}`)
+      .replace('{{taxes}}', `${this.getTaxes()}`)
   }
 }

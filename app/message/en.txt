@@ -1,0 +1,1 @@
+Total price was ${{price}}, taxes was ${{taxes}}. Thanks you for your order.
